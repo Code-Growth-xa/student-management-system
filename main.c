@@ -5,7 +5,7 @@ int main(){
     int count=0;
     int choice;
     do{
-        choice=studentMenu;
+        choice=studentMenu();
         switch(choice){
             case 1: addStudent(list,&count);
             break;

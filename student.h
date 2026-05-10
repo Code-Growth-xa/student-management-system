@@ -14,7 +14,7 @@ typedef struct Student{
     int StudentClass;
 }Student;
 //函数声明
-void studentMenu(void);
+int studentMenu(void);
 void addStudent(Student list[MAX_STUDENTS],int *count);
 void deleteStudent(Student list[MAX_STUDENTS],int *count);
 void modifyStudent(Student list[MAX_STUDENTS],int *count);
@@ -25,4 +25,4 @@ void statistics(Student list[MAX_STUDENTS],int *count);
 void saveToFile(Student list[MAX_STUDENTS],int *count);
 void loadFromFile(Student list[MAX_STUDENTS],int *count);
 void exitProgram(void);
-#endif STUDENT_H
+#endif //STUDENT_H

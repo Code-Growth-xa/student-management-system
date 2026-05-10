@@ -3,7 +3,7 @@
 #include <string.h>
 #include "student.h"
 //学生管理系统功能菜单
-void studentMenu(void){
+int studentMenu(void){
     int choice;
     printf("西安理工大学 学生管理系统\n");
     printf("1. 添加学生\n");
@@ -17,7 +17,7 @@ void studentMenu(void){
     printf("9. 从文件加载\n");
     printf("10. 退出\n");
     printf("请输入你选择的功能序号：\n");
-    scanf("%d",choice);
+    scanf("%d",&choice);
     return choice;
 }
 //添加学生信息
@@ -73,6 +73,7 @@ void modifyStudent(Student list[MAX_STUDENTS],int *count){
         }
         printf("修改学号成功\n");
 }
+}
 //查找学生信息
 void searchStudent(Student list[MAX_STUDENTS],int *count){
     char id[STUDENT_ID_LENGTH];
@@ -99,13 +100,13 @@ void displayallSTUDENT(Student list[MAX_STUDENTS],int *count){
     }
 }
 // 按照成绩给学生排序
-void sortStudentByGrade(Student list[MAX_STUDENTS],int *count){
+void sortStudentsByGrade(Student list[MAX_STUDENTS],int *count){
     for(int i =0;i<*count-1;i++){
         for(int j=0;j<*count-i-1;j++){
-            if(list[j].Grade<list[j+1].Grade){
-                Student temp=list[j].Grade;
-                list[j].Grade=list[j+1].Grade;
-                list[j+1].Grade=temp;
+            if(list[j].StudentGrade<list[j+1].StudentGrade){
+                Student temp=list[j];
+                list[j].StudentGrade=list[j+1].StudentGrade;
+                list[j+1]=temp;
             }
         }
     }
@@ -121,26 +122,26 @@ void statistics(Student list[MAX_STUDENTS],int *count){
     }else{
     for(int i=0;i<*count-1;i++){
         for(int j=0;j<*count-1-i;j++){
-            if(list[j].Grade<list[j+1].Grade){
+            if(list[j].StudentGrade<list[j+1].StudentGrade){
                 Student temp=list[j];
                 list[j]=list[j+1];
                 list[j+1]= temp;
             }
         }
     }
-    int The_highest_Grade=list[0].Grade;
+    int The_highest_Grade=list[0].StudentGrade;
     printf("最高成绩是%d\n",The_highest_Grade);
-    int The_minimum_Grade=list[*count-1].Grade;
+    int The_minimum_Grade=list[*count-1].StudentGrade;
     printf("最低成绩是%d\n",The_minimum_Grade);
     for(int i =0;i<*count;i++){
-        sum +=list[i].Grade;
+        sum +=list[i].StudentGrade;
     }
     float Average_Grade = (float)sum/ *count;
     printf("平均成绩是：%.2f\n",Average_Grade);}
 }
 //保存至文件（二进制文件）
 void saveToFile(Student list[MAX_STUDENTS],int *count){
-    FILE *fp=fopen("Students.dat","wb");
+    FILE *fp=fopen("students.dat","wb");
     if(fp==NULL){
         printf("打开文件失败");
         return;
@@ -152,7 +153,7 @@ void saveToFile(Student list[MAX_STUDENTS],int *count){
 }
 //从文件中读取
 void loadFromFile(Student list[MAX_STUDENTS],int *count){
-    FILE*fp=fopen("Students.dat","rb");
+    FILE*fp=fopen("students.dat","rb");
     if(fp==NULL){
         printf("文件打开失败") ;
         return;
