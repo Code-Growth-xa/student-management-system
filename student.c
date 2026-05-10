@@ -4,6 +4,7 @@
 #include "student.h"
 //学生管理系统功能菜单
 void studentMenu(void){
+    int choice;
     printf("西安理工大学 学生管理系统\n");
     printf("1. 添加学生\n");
     printf("2. 删除学生\n");
@@ -15,6 +16,9 @@ void studentMenu(void){
     printf("8. 保存到文件\n");
     printf("9. 从文件加载\n");
     printf("10. 退出\n");
+    printf("请输入你选择的功能序号：\n");
+    scanf("%d",choice);
+    return choice;
 }
 //添加学生信息
 void addStudent(Student list[MAX_STUDENTS],int *count){

@@ -25,5 +25,4 @@ void statistics(Student list[MAX_STUDENTS],int *count);
 void saveToFile(Student list[MAX_STUDENTS],int *count);
 void loadFromFile(Student list[MAX_STUDENTS],int *count);
 void exitProgram(void);
-
 #endif STUDENT_H
