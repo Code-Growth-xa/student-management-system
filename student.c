@@ -134,5 +134,27 @@ void statistics(Student list[MAX_STUDENTS],int *count){
     float Average_Grade = (float)sum/ *count;
     printf("平均成绩是：%.2f\n",Average_Grade);}
 }
-//保存至文件
-
+//保存至文件（二进制文件）
+void saveToFile(Student list[MAX_STUDENTS],int *count){
+    FILE *fp=fopen("Students.dat","wb");
+    if(fp==NULL){
+        printf("打开文件失败");
+        return;
+    }
+    fwrite(count,sizeof(int),1,fp);
+    fwrite(list,sizeof(Student),*count,fp);
+    fclose(fp);
+    printf("数据保存成功");
+}
+//从文件中读取
+void loadFromFile(Student list[MAX_STUDENTS],int *count){
+    FILE*fp=fopen("Students.dat","rb");
+    if(fp==NULL){
+        printf("文件打开失败") ;
+        return;
+    }
+    fread(count,sizeof(int),1,fp);
+    fread(list,sizeof(Student),*count,fp);
+    fclose(fp);
+    printf("文件读取成功");
+}
