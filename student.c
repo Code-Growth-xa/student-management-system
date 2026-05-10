@@ -4,7 +4,7 @@
 #include "student.h"
 //学生管理系统功能菜单
 void studentMenu(void){
-    printf("学生管理系统\n");
+    printf("西安理工大学 学生管理系统\n");
     printf("1. 添加学生\n");
     printf("2. 删除学生\n");
     printf("3. 修改学生信息\n");
@@ -70,3 +70,69 @@ void modifyStudent(Student list[MAX_STUDENTS],int *count){
         printf("修改学号成功\n");
 }
 //查找学生信息
+void searchStudent(Student list[MAX_STUDENTS],int *count){
+    char id[STUDENT_ID_LENGTH];
+    printf("请输入要查找的学生学号");
+    scanf("%s",id);
+    for(int i=0;i<*count;i++){
+        if(strcmp(id,list[i].StudentID)==0){
+            printf("学生姓名: %s\n",list[i].name);
+            printf("学生学号: %s\n",list[i].StudentID);
+            printf("学生学院: %s\n",list[i].StudentCollege);
+            printf("学生年级: %d\n",list[i].StudentGrade);
+            printf("学生班级: %d\n",list[i].StudentClass);
+            break;}
+        }
+    }
+//显示所有学生信息
+void displayallSTUDENT(Student list[MAX_STUDENTS],int *count){
+    for(int i=0;i<*count;i++){
+        printf("学生姓名: %s\n",list[i].name);
+        printf("学生学号: %s\n",list[i].StudentID);
+        printf("学生学院: %s\n",list[i].StudentCollege);
+        printf("学生年级: %d\n",list[i].StudentGrade);
+        printf("学生班级: %d\n",list[i].StudentClass);
+    }
+}
+// 按照成绩给学生排序
+void sortStudentByGrade(Student list[MAX_STUDENTS],int *count){
+    for(int i =0;i<*count-1;i++){
+        for(int j=0;j<*count-i-1;j++){
+            if(list[j].Grade<list[j+1].Grade){
+                Student temp=list[j].Grade;
+                list[j].Grade=list[j+1].Grade;
+                list[j+1].Grade=temp;
+            }
+        }
+    }
+}
+//统计信息
+void statistics(Student list[MAX_STUDENTS],int *count){
+    int The_highest_Grade=0;
+    int The_minimum_Grade=0;
+    float Average_Grade=0;
+    int sum=0;
+    if(*count==0){
+        printf("还没有添加任何学生");
+    }else{
+    for(int i=0;i<*count-1;i++){
+        for(int j=0;j<*count-1-i;j++){
+            if(list[j].Grade<list[j+1].Grade){
+                Student temp=list[j];
+                list[j]=list[j+1];
+                list[j+1]= temp;
+            }
+        }
+    }
+    int The_highest_Grade=list[0].Grade;
+    printf("最高成绩是%d\n",The_highest_Grade);
+    int The_minimum_Grade=list[*count-1].Grade;
+    printf("最低成绩是%d\n",The_minimum_Grade);
+    for(int i =0;i<*count;i++){
+        sum +=list[i].Grade;
+    }
+    float Average_Grade = (float)sum/ *count;
+    printf("平均成绩是：%.2f\n",Average_Grade);}
+}
+//保存至文件
+
