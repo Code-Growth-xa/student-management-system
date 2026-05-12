@@ -1,29 +1,28 @@
 #include<stdio.h>
 #include"student.h"
 int main(){
-    Student list[MAX_STUDENTS];
     int count=0;
     int choice;
     do{
-        choice=studentMenu();
+        choice=studentMenu(void);
         switch(choice){
-            case 1: addStudent(list,&count);
+            case 1: addStudent();
             break;
-            case 2:deleteStudent(list,&count);
+            case 2:deleteStudent();
             break;
-            case 3:modifyStudent(list,&count);
+            case 3:modifyStudent();
             break;
-            case 4:searchStudent(list,&count);
+            case 4:searchStudent();
             break;
-            case 5:displayallSTUDENT(list,&count);
+            case 5:displayallSTUDENT();
             break;
-            case 6:sortStudentsByGrade(list,&count);
+            case 6:sortStudentsByGrade();
             break;
-            case 7:statistics(list,&count);
+            case 7:statistics();
             break;
-            case 8:saveToFile(list,&count);
+            case 8:saveToFile();
             break;
-            case 9:loadFromFile(list,&count);
+            case 9:loadFromFile();
             break;
             case 10:printf("正在退出系统......") ;
             break;

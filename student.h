@@ -1,28 +1,26 @@
 #ifndef STUDENT_H
 #define STUDENT_H
-//宏定义：最大学生数量、姓名长度、学号长度、学院名称长度
-#define MAX_STUDENTS 100
-#define NAME_LENGTH 25
-#define STUDENT_ID_LENGTH 11
-#define COLLEGE_NAME_LENGTH 30
 //学生结构体定义:学生姓名、学号、学院、年级、班级
 typedef struct Student{
-    char name[NAME_LENGTH];
-    char StudentID[STUDENT_ID_LENGTH];
-    char StudentCollege[COLLEGE_NAME_LENGTH];
-    int StudentGrade;
-    int StudentClass;
+    char StudentName[25];
+    char StudentID[20];
+    char StudentCollege[12];
+    float StudentScore;
+    char StudentClass[10];
+    struct Student*next;
 }Student;
 //函数声明
-int studentMenu(void);
-void addStudent(Student list[MAX_STUDENTS],int *count);
-void deleteStudent(Student list[MAX_STUDENTS],int *count);
-void modifyStudent(Student list[MAX_STUDENTS],int *count);
-void searchStudent(Student list[MAX_STUDENTS],int *count);
-void displayallSTUDENT(Student list[MAX_STUDENTS],int *count);
-void sortStudentsByGrade(Student list[MAX_STUDENTS],int *count);
-void statistics(Student list[MAX_STUDENTS],int *count);
-void saveToFile(Student list[MAX_STUDENTS],int *count);
-void loadFromFile(Student list[MAX_STUDENTS],int *count);
-void exitProgram(void);
+Student *CreateNode(const char *StudentName,const char *StudentID,char *StudentCollege,float StudentScore,char *StudentClass);
+void FreeNode(Student *head)
+int StudentMenu(void);
+void AddStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,char *StudentClass);
+void DeleteStudent(Student *head,const char *StudentName,const char *StudentID);
+void ModifyStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,char *StudentClass);
+void SearchStudent(Student *head,const char *StudentID);
+void DisplayAllStudents(Student *head);
+void SortStudentsByScore(Student *head);
+void Statistics(Student *head);
+void SaveToFile(Student *head);
+void LoadFromFile(Student *head);
+void ExitProgram(Student *head);
 #endif //STUDENT_H
