@@ -6,17 +6,17 @@ typedef struct Student{
     char StudentID[20];
     char StudentCollege[12];
     float StudentScore;
-    char StudentClass[10];
+    char StudentGrade_Class[10];
     struct Student*next;
 }Student;
 //函数声明
-Student *CreateNode(const char *StudentName,const char *StudentID,char *StudentCollege,float StudentScore,char *StudentClass);
-void FreeNode(Student *head)
+Student *CreateNode(const char *StudentName,const char *StudentID,char *StudentCollege,float StudentScore,char *StudentGrade_Class);
+void FreeNode(Student *head);
 int StudentMenu(void);
-void AddStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,char *StudentClass);
-void DeleteStudent(Student *head,const char *StudentName,const char *StudentID);
-void ModifyStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,char *StudentClass);
-void SearchStudent(Student *head,const char *StudentID);
+void AddStudent(Student *head);
+void DeleteStudent(Student *head);
+void ModifyStudent(Student *head);
+void SearchStudent(Student *head);
 void DisplayAllStudents(Student *head);
 void SortStudentsByScore(Student *head);
 void Statistics(Student *head);

@@ -20,42 +20,54 @@ int studentMenu(void){
     scanf("%d",&choice);
     return choice;
 }
+//节点生产工厂
+Student *CreateNode(const char *StudentName,const char *StudentID,char *StudentCollege,float StudentScore,char *StudentGrade_Class){
+    Student *NewNode=(Student*)malloc(sizeof(Node));
+    if(NewNode==NULL){
+        printf("内存申请失败") ;
+        return NULL;
+    }
+    strcpy(NewNode->StudentName,StudentName);
+    strcpy(NewNode->StudentID,StudentID);
+    Strcpy(NewNode->StudentCollege,StudentCollege);
+    NewNode->StudentScore=StudentScore;
+    NewNode->next=NULL;
+    return NewNode;
+}
+//释放节点
+void FreeNode(Student *head){
+    Student *current;
+    while(temp!==NULL){
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+    head = NULL;
+}
 //添加学生信息
-void addStudent(Student list[MAX_STUDENTS],int *count){
-    if (*count>=MAX_STUDENTS){
-        printf("学生数量已达上限，无法添加更多学生。\n");
+AddStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,char *StudentGrade_Class){
+    Student *NewStudent = CreateNode(StudentName,StudentID,StudentCollege,StudentGrade_Class);
+    if(NewStudent==NULL){
+        printf("节点创建失败");
         return;
     }
-    Student newStudent;
-    printf ("请输入学生姓名: ");
-    scanf("%s", newStudent.name);
-    printf ("请输入学生学号: ");
-    scanf("%s", newStudent.StudentID);
-    printf ("请输入学生学院: ");
-    scanf("%s", newStudent.StudentCollege);
-    printf ("请输入学生年级: ");
-    scanf("%d", &newStudent.StudentGrade);
-    printf ("请输入学生班级: ");
-    scanf("%d", &newStudent.StudentClass);
-    list[*count] = newStudent;
-    *count ++;
+    NewStudent->next=head->next;
+    head->next=NewStudent;
 }
 //删除学生信息
- void deleteStudent(Student list[MAX_STUDENTS],int *count){
-    char id[STUDENT_ID_LENGTH];
-    printf("请输入要删除的学生学号");
-    scanf("%s",id);
-    int delete=0;
-    for(int i=0;i<*count;i++){
-        if(strcmp(id,list[i].StudentID)==0){
-            int delet=i;
-            break;
-        }
+ void deleteStudent(Student*head,const char* StudentID){
+    Student *prev =head;
+    Student *current =head->next;
+    while(current!=NULL&&strcmp(current->StudentID,StudentID)!=0){
+        prev = head;
+        current = current->next;
     }
-    for(int i=delete;i<=*count;i++){
-        list[i]=list[i+1];
+    if(current == NULL){
+        printf("error");
+        return;
     }
-    *count--;
+    prev->next = current->next;
+    free(current);
     printf("学生删除成功\n");
  }
  // 修改学生信息
