@@ -36,11 +36,12 @@ Student *CreateNode(const char *StudentName,const char *StudentID,char *StudentC
 }
 //释放节点
 void FreeNode(Student *head){
-    Student *current;
-    while(temp!==NULL){
+    Student *temp;
+    while(head!==NULL){
         temp = head;
         head = head->next;
         free(temp);
+        temp = NULL;
     }
     head = NULL;
 }
@@ -59,7 +60,7 @@ AddStudent(Student *head,const char *StudentName,const char *StudentID,const cha
     Student *prev =head;
     Student *current =head->next;
     while(current!=NULL&&strcmp(current->StudentID,StudentID)!=0){
-        prev = head;
+        prev = current;
         current = current->next;
     }
     if(current == NULL){
@@ -71,58 +72,73 @@ AddStudent(Student *head,const char *StudentName,const char *StudentID,const cha
     printf("学生删除成功\n");
  }
  // 修改学生信息
-void modifyStudent(Student list[MAX_STUDENTS],int *count){
-    char id [STUDENT_ID_LENGTH];
-    printf("请输入要修改的学生学号");
-    scanf("%s",id);
-    char newID[STUDENT_ID_LENGTH];
-    printf(" 请输入新的学号\n");
-    scanf("%s",newID);
-    for(int i=0;i<*count;i++){
-        if(strcmp(id,list[i].StudentID)==0){
-            strcpy(list[i].StudentID,newID);
-            break;
-        }
-        printf("修改学号成功\n");
-}
+void ModifyStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,char *StudentGrade_Class
+){
+    Student *current = head->next;
+    while(current != NULL&&strcmp(current.StudentID,StudentID)){
+        current = current ->next;
+    }
+    if (current == NULL){
+        printf("error");
+        break;
+    }
+    strcpy (current->StudentName,StudentName);
+    strcpy(current->StudentCollege,StudentCollege);
+    strcpy(current->StudentGrade_Class,StudentGrade_Class);
+    printf("学生信息修改成功");
 }
 //查找学生信息
-void searchStudent(Student list[MAX_STUDENTS],int *count){
-    char id[STUDENT_ID_LENGTH];
-    printf("请输入要查找的学生学号");
-    scanf("%s",id);
-    for(int i=0;i<*count;i++){
-        if(strcmp(id,list[i].StudentID)==0){
-            printf("学生姓名: %s\n",list[i].name);
-            printf("学生学号: %s\n",list[i].StudentID);
-            printf("学生学院: %s\n",list[i].StudentCollege);
-            printf("学生年级: %d\n",list[i].StudentGrade);
-            printf("学生班级: %d\n",list[i].StudentClass);
-            break;}
-        }
+void searchStudent(Student *head,){
+    Student *current = head->next;
+    while(current != NULL&&strcmp(current.StudentID,StudentID)){
+        current = current ->next;
+    }
+    if (current == NULL){
+        printf("error");
+        return;
+    }
+    printf("找到学生信息:\n")
+    printf("学生姓名: %s\n",current.StudentName);
+    printf("学生学号: %s\n",current.StudentID);
+    printf("学生学院: %s\n",current.StudentCollege);
+    printf("学生成绩: %.2f\n",current.StudentScore);
+    printf("学生年级班级: %s\n",current.StudentGrade_Class);
     }
 //显示所有学生信息
-void displayallSTUDENT(Student list[MAX_STUDENTS],int *count){
-    for(int i=0;i<*count;i++){
-        printf("学生姓名: %s\n",list[i].name);
-        printf("学生学号: %s\n",list[i].StudentID);
-        printf("学生学院: %s\n",list[i].StudentCollege);
-        printf("学生年级: %d\n",list[i].StudentGrade);
-        printf("学生班级: %d\n",list[i].StudentClass);
+void DisplayAllStudents(Student *head){
+    Student *current = head->next;
+    while(current !=NULL&&strcmp(current.StudentID)){
+        current = current->next
     }
+    if (current=NULL){
+     (current == NULL){
+        printf("error");
+        return;
+     }
+    printf("学生姓名: %s\n",current.StudentName);
+    printf("学生学号: %s\n",current.StudentID);
+    printf("学生学院: %s\n",current.StudentCollege);
+    printf("学生成绩: %.2f\n",current.StudentScore);
+    printf("学生年级班级: %s\n",current.StudentGrade_Class);
+}
 }
 // 按照成绩给学生排序
-void sortStudentsByGrade(Student list[MAX_STUDENTS],int *count){
-    for(int i =0;i<*count-1;i++){
-        for(int j=0;j<*count-i-1;j++){
-            if(list[j].StudentGrade<list[j+1].StudentGrade){
-                Student temp=list[j];
-                list[j].StudentGrade=list[j+1].StudentGrade;
-                list[j+1]=temp;
-            }
-        }
+void SortStudentsByGrade(Student *head){
+    Student *current = head->next;
+    while(current != NULL){
+        while()
+
+
+        currnt = current->next;
     }
+
 }
+
+
+
+
+
+
 //统计信息
 void statistics(Student list[MAX_STUDENTS],int *count){
     int The_highest_Grade=0;

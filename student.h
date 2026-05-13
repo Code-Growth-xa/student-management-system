@@ -18,7 +18,7 @@ void DeleteStudent(Student *head);
 void ModifyStudent(Student *head);
 void SearchStudent(Student *head);
 void DisplayAllStudents(Student *head);
-void SortStudentsByScore(Student *head);
+void SortStudentsByGrade(Student *head);
 void Statistics(Student *head);
 void SaveToFile(Student *head);
 void LoadFromFile(Student *head);
