@@ -10,13 +10,13 @@ typedef struct Student{
     struct Student*next;
 }Student;
 //函数声明
-Student *CreateNode(const char *StudentName,const char *StudentID,char *StudentCollege,float StudentScore,char *StudentGrade_Class);
+Student *CreateNode(const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,const char *StudentGrade_Class);
 void FreeNode(Student *head);
 int StudentMenu(void);
-void AddStudent(Student *head);
-void DeleteStudent(Student *head);
-void ModifyStudent(Student *head);
-void SearchStudent(Student *head);
+void AddStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,const char *StudentGrade_Class);
+void DeleteStudent(Student *head,const char *StudentID);
+void ModifyStudent(Student *head,const char *StudentName,const char *StudentID,const char *StudentCollege,float StudentScore,const char *StudentGrade_Class);
+void SearchStudent(Student *head,const char *StudentID);
 void DisplayAllStudents(Student *head);
 void SortStudentsByGrade(Student *head);
 void Statistics(Student *head);
