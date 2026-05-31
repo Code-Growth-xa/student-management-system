@@ -56,7 +56,7 @@ AddStudent(Student *head,const char *StudentName,const char *StudentID,const cha
     head->next=NewStudent;
 }
 //删除学生信息
- void deleteStudent(Student*head,const char* StudentID){
+ void DeleteStudent(Student*head,const char* StudentID){
     Student *prev =head;
     Student *current =head->next;
     while(current!=NULL&&strcmp(current->StudentID,StudentID)!=0){
