@@ -125,62 +125,64 @@ void DisplayAllStudents(Student *head){
 // 按照成绩给学生排序
 void SortStudentsByGrade(Student *head){
     Student *current = head->next;
-    while(current != NULL){
-        while()
-
-
-        currnt = current->next;
+    if(head==NULL )
+    {
+        printf("没有学生信息");
+        return;
     }
-
+    while(current != NULL){
+        Student *next = current->next;
+        while(next != NULL){
+            if(current->StudentScore < next->StudentScore){
+                Student temp = *current;
+                *current = *next;
+                *next = temp;
+            }
+            next = next->next;
+        }
+        current = current->next;
+    }
+    printf("学生信息已按照成绩排序");
 }
-
-
-
-
-
 
 //统计信息
-void statistics(Student list[MAX_STUDENTS],int *count){
-    int The_highest_Grade=0;
-    int The_minimum_Grade=0;
-    float Average_Grade=0;
-    int sum=0;
-    if(*count==0){
-        printf("还没有添加任何学生");
-    }else{
-    for(int i=0;i<*count-1;i++){
-        for(int j=0;j<*count-1-i;j++){
-            if(list[j].StudentGrade<list[j+1].StudentGrade){
-                Student temp=list[j];
-                list[j]=list[j+1];
-                list[j+1]= temp;
-            }
-        }
+void statistics(Student *head){
+    if(head == NULL){
+        printf("没有学生信息");
+        return;
     }
-    int The_highest_Grade=list[0].StudentGrade;
-    printf("最高成绩是%d\n",The_highest_Grade);
-    int The_minimum_Grade=list[*count-1].StudentGrade;
-    printf("最低成绩是%d\n",The_minimum_Grade);
-    for(int i =0;i<*count;i++){
-        sum +=list[i].StudentGrade;
+    float totalScore = 0.0;
+    Student *current = head->next;
+    int count = 0;
+    while(current != NULL){
+        totalScore += current->StudentScore;
+        count++;
+        current = current->next;
     }
-    float Average_Grade = (float)sum/ *count;
-    printf("平均成绩是：%.2f\n",Average_Grade);}
+    float averageScore = totalScore / count;
+    printf("学生总数: %d\n",count);
+    printf("学生平均成绩: %.2f\n",averageScore);
 }
 //保存至文件（二进制文件）
-void saveToFile(Student list[MAX_STUDENTS],int *count){
-    FILE *fp=fopen("students.dat","wb");
+void saveToFile(Student *head){
+    FILE*fp=fopen("students.dat","wb");
+    int count=0;
+    Student *current = head->next;
+    while(current != NULL){
+        count++;
+        current = current->next;
+    }
     if(fp==NULL){
-        printf("打开文件失败");
+        printf("文件打开失败") ;
         return;
     }
     fwrite(count,sizeof(int),1,fp);
     fwrite(list,sizeof(Student),*count,fp);
     fclose(fp);
-    printf("数据保存成功");
+    printf("文件保存成功");
 }
 //从文件中读取
-void loadFromFile(Student list[MAX_STUDENTS],int *count){
+void loadFromFile(Student *head){
     FILE*fp=fopen("students.dat","rb");
     if(fp==NULL){
         printf("文件打开失败") ;
@@ -189,5 +191,5 @@ void loadFromFile(Student list[MAX_STUDENTS],int *count){
     fread(count,sizeof(int),1,fp);
     fread(list,sizeof(Student),*count,fp);
     fclose(fp);
-    printf("文件读取成功");
+    printf("文件加载成功");
 }
